@@ -1,10 +1,14 @@
-import Express from 'express';
+import Express from 'express'; //server host
 import mongoose from 'mongoose';
+//Body parser is a middleware that basically takes requests and parses
+//http://www.senchalabs.org/connect/bodyParser.html
 import bodyParser from 'body-parser';
+//tool to simplify file path names
 import path from 'path';
 
 // Webpack Requirements
 import webpack from 'webpack';
+//change "dev" to "prod" to go to production, vice-versa
 import config from '../webpack.config.dev';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
@@ -12,13 +16,16 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 // Initialize the Express App
 const app = new Express();
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV == 'production') {
   const compiler = webpack(config);
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
   app.use(webpackHotMiddleware(compiler));
 }
 
 // React And Redux Setup
+// "Redux is a predictable state container for JavaScript apps
+// we may way to include Immutable
+// understanding redux will be very important
 import { configureStore } from '../shared/redux/store/configureStore';
 import { Provider } from 'react-redux';
 import React from 'react';
@@ -59,7 +66,7 @@ const renderFullPage = (html, initialState) => {
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>MERN Starter - Blog App</title>
+        <title>wbm</title>
         <link rel="stylesheet" href=${cssPath} />
         <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'/>
         <link rel="shortcut icon" href="http://res.cloudinary.com/hashnode/image/upload/v1455629445/static_imgs/mern/mern-favicon-circle-fill.png" type="image/png" />

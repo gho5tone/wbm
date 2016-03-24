@@ -33,7 +33,6 @@ function dropDB(done) {
 describe('GET /api/getPosts', function () {
 
   beforeEach('connect and add two post entries', function (done) {
-
     connectDB(function () {
       var post1 = new Post({name: 'Prashant', title: 'Hello Mern', content: "All cats meow 'mern!'"});
       var post2 = new Post({name: 'Mayank', title: 'Hi Mern', content: "All dogs bark 'mern!'"});
@@ -65,11 +64,14 @@ describe('GET /api/getPosts', function () {
 describe('GET /api/getPost', function () {
 
   beforeEach('connect and add one Post entry', function(done){
+    console.log('BEFORE EACH TEST 2');
 
     connectDB(function () {
       var post = new Post({ name: 'Foo', title: 'bar', slug: 'bar', cuid: 'f34gb2bh24b24b2', content: 'Hello Mern says Foo' });
+      console.log('after post');
 
       post.save(function (err, saved) {
+        console.log('after post save');
         done();
       });
     });
@@ -80,6 +82,7 @@ describe('GET /api/getPost', function () {
   });
 
   it('Should send correct data when queried against a title', function (done) {
+
 
     request(app)
       .get('/api/getPost?slug=bar-f34gb2bh24b24b2')
