@@ -1,3 +1,3 @@
-wbw
+Chatm
 
-more coming soon!
+A simple chat app featuring webm integration!
