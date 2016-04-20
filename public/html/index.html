@@ -9,11 +9,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   </head>
   <body>
-    <h1>Chatm</h1>
-    <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" autofocus="true" /><button>Send</button>
-    </form>
+    <div id="container">
+      <div id="chat">
+        <h1>Chatm</h1>
+        <ul id="messages"></ul>
+        <form action="">
+          <input id="m" autocomplete="off" autofocus="true" /><button>Send</button>
+        </form>
+      </div>
+      <div id="webm">
+        <h1>Webm</h1>
+      </div>
+  </div>
   </body>
   <!--the socket script has to be after the form is declared-->
   <script src="../js/socket.js"></script>
