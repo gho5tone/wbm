@@ -3,12 +3,18 @@
   <head>
     <title>Chatm</title>
     <link rel="stylesheet" type="text/css" href="../css/mystyle.css">
+
+    <!--This section right here is the client side socket-->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   </head>
   <body>
-<h1> test</h1>
+    <h1>Chatm</h1>
+    <ul id="messages"></ul>
     <form action="">
-      <input id="m" autocomplete="off" />
-      <button>Send</button>
+      <input id="m" autocomplete="off" autofocus="true" /><button>Send</button>
     </form>
   </body>
+  <!--the socket script has to be after the form is declared-->
+  <script src="../js/socket.js"></script>
 </html>
