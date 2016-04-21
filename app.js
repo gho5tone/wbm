@@ -1,4 +1,7 @@
-// set variables for environment
+/**
+  * Setting variables for environment
+  * Also doing some initialization
+  */
 var express = require('express');
 var app = express();
 var path = require('path');
@@ -6,9 +9,9 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 /**
-  * Everything in the public folder will be served statically
-  * This means that we can go to localhost:[port]/page.html
-  * In this way index can access the css
+  * This lines makes it so that everything in the public folder will be
+  * served statically. This means that we can go to localhost:[port]/page.html
+  * i.e. In this way index.html can access the css/js folders
   */
 app.use(express.static(__dirname + '/public'));
 
@@ -29,7 +32,7 @@ io.on('connection', function(socket) {
   });
 });
 
-// Set server port
+// Set server port and run it
 http.listen(3000, function() {
   console.log('server is running');
 });
