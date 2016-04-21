@@ -5,7 +5,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var app = express();
-//var path = require('path');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
@@ -53,6 +52,9 @@ io.on('connection', function(socket) {
   //you can make custom events such as this 'chat message'
   socket.on('chat message', function(msg) {
     io.emit('chat message', msg);
+  });
+  socket.on('webm', function(url) {
+    io.emit('webm', url);
   });
   // TODO: Figure out if we want webm to be integrated in the chat or apart
   // TODO: Listener for new users
