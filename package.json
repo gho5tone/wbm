@@ -1,0 +1,29 @@
+{
+  "name": "chatm",
+  "version": "1.0.0",
+  "description": "A simple chat app featuring webms",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JisubChung/wbm.git"
+  },
+  "keywords": [
+    "chat",
+    "webm"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JisubChung/wbm/issues"
+  },
+  "homepage": "https://github.com/JisubChung/wbm#readme",
+  "dependencies": {
+    "express": "^4.13.4",
+    "nodemon": "^1.9.1",
+    "socket.io": "^1.4.5"
+  }
+}

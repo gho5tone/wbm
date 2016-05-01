@@ -63,5 +63,5 @@ io.on('connection', function(socket) {
 
 // Set server port and run it
 http.listen(3000, function() {
-  console.log('server is running');
+  console.log('server is running on http://localhost:3000');
 });
