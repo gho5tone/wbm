@@ -1,11 +1,29 @@
 //dont need to specify the port number because assumes host
 var socket = io();
+
+
+$('#usersbox').submit(function(e) {
+  // prevent the form from submitting
+  e.preventDefault();
+  socket.emit('new user', $('#set-user-name').val(), function(check) {
+    if(check) {
+      $('#user-name').hide();
+      $('#container').show();
+    } else {
+      $('#errors').html('User already exists');
+    }
+  });
+
+  $('#set-user-name').val('');
+});
 /**
   * This first method is the message sender
   * it works by using an emmitter which sends a 'chat message' "object"
   * it is sent from #m's value
   */
-$('form').submit(function() {
+$('#chatbox').submit(function(e) {
+  // prevent the form from submitting
+  e.preventDefault();
   // Here's a basic webm interaction
   if ($('#m').val() == "you were the chosen one") {
     // TODO: Figure out how to detect webm playing or not
@@ -27,6 +45,9 @@ $('form').submit(function() {
   return false;
 });
 
+/**
+ * Issue the message to the client
+ */
 function chatMessage() {
   socket.emit('chat message', $('#m').val());
   $('#m').val('');
@@ -35,6 +56,14 @@ function chatMessage() {
 /**
   * This method is the listener for messages from other sockets
   */
-socket.on('chat message', function(msg) {
-  $('#messages').append($('<li>').text(msg));
+socket.on('chat message', function(data) {
+  $('#messages').append('<li><b>' + data.user + ':</b> ' + data.msg + '</li>');
+});
+
+socket.on('usernames', function(users) {
+  var str = '';
+  for(i = 0; i<users.length; i++) {
+    str += '<li>' + users[i] + '</li>';
+  }
+  $('#users').html(str);
 });
