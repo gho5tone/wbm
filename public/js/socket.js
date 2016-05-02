@@ -36,6 +36,5 @@ function chatMessage() {
   * This method is the listener for messages from other sockets
   */
 socket.on('chat message', function(msg) {
-  $('#messages').append($('<div class="chip">').text(msg));
-  $('.chip').append($('<br>'));
+  $('#messages').append($('<li>').text(msg));
 });
