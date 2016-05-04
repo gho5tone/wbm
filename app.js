@@ -24,7 +24,10 @@ var ChatSchema = mongoose.Schema({
   created: Date,
   content: String,
   username: String
-})
+});
+
+// TODO: these should live on the database
+var usernames = [];
 
 // TODO: Figure out if we need "CORS" and what it is
 
@@ -49,10 +52,23 @@ app.get('/', function(req, res) {
   * incoming socket events
   */
 io.on('connection', function(socket) {
-  //you can make custom events such as this 'chat message'
-  socket.on('chat message', function(msg) {
-    io.emit('chat message', msg);
+  //let's create and check for user uniqueness
+  socket.on('new user', function(data, callback) {
+    if(usernames.indexOf(data) != -1) {
+      callback(false);
+    } else {
+      callback(true);
+      socket.nickname = data;
+      usernames.push(socket.nickname);
+      updateUsernames();
+    }
   });
+  //you can make custom events such as this 'chat message'
+  socket.on('chat message', function(data) {
+    io.emit('chat message', {msg: data , user: socket.nickname});
+  });
+
+  //the wbm socket
   socket.on('webm', function(url) {
     io.emit('webm', url);
   });
@@ -60,6 +76,24 @@ io.on('connection', function(socket) {
   // TODO: Listener for new users
   // TODO: Listener for new message (connect to db)
 });
+
+/**
+ * This handles the usernames when a user exits the application
+ * 'disconnect' is a built in listener that listens in on when
+ * a disconnect occurs
+ */
+io.on('disconnect', function(data) {
+  if(!socket.nickname) return;
+  usernames.splice(usernames.indexOf(socket.nickname), 1);
+  updateUsernames();
+});
+
+/**
+ * Updates the usernames lis
+ */
+function updateUsernames() {
+    io.emit('usernames', usernames);
+}
 
 // Set server port and run it
 http.listen(3000, function() {

@@ -1,2 +1,6 @@
 /node_modules
 npm-debug.log
+public/.idea/encodings.xml
+*.xml
+public/.idea/public.iml
+*.name

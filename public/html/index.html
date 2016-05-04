@@ -9,23 +9,36 @@
     <!-- App styles  -->
     <link rel="stylesheet" type="text/css" href="../css/mystyle.css">
     <!--Importing jquery-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
     <!--This section right here is the client side socket-->
-    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
   </head>
   <body>
-    <div id="container">
-      <div id="chat">
-        <h1>Chatm</h1>
-        <ul id="messages"></ul>
+
+    <nav>
+      <div class="nav-wrapper">
+        <a href="/" class="brand-logo">Chatm</a>
+        <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          <li><a id="logOut" href="#">Log Out</a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-nav">
+          <li><a href="#">Log Out</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div id="user-name">
+      <p>Enter a user name</p>
+      <p id="errors" style="color:red;"></p>
       <div class="row">
-          <form class="col s12">
+          <form id="usersbox" class="col s12">
             <div class="row">
               <div class="input-field col s5">
-                <input id="m" type="text">
-                <label for="m">Message</label>
+                <input id="set-user-name" type="text">
+                <label for="set-user-name">User Name</label>
               </div>
               <div class="input-field col s3">
               <button class="btn waves-effect waves-light" type="submit" name="action">
@@ -35,15 +48,39 @@
             </div>
           </form>
         </div>
+    </div>
+
+    <div id="container">
+      <div id="chat">
+        <ul id="messages"></ul>
+      <div class="row">
+          <form id="chatbox" class="col s12">
+            <div class="row">
+              <div class="input-field col s6">
+                <input id="m" type="text">
+                <label for="m">Message</label>
+              </div>
+              <div class="input-field col s1 offset-s4">
+              <button class="btn waves-effect waves-light" type="submit" name="action">
+                <i class="material-icons">send</i>
+              </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        </div>
+
+      <div id="users">
       </div>
+
       <div id="webm">
-        <h1>Webm</h1>
         <iframe width="420" height="315"
         src="https://www.youtube.com/embed/HUBWxiu5cOo"
         frameborder="0" allowfullscreen id="webmFrame"></iframe>
       </div>
-  </div>
+    </div>
   </body>
   <!--the socket script has to be AFTER the form is declared-->
-  <script src="../js/socket.js"></script>
+  <script type="text/javascript" src="../js/socket.js"></script>
+  <script type="text/javascript" src="../js/functions.js"></script>
 </html>
